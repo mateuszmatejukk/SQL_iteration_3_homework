@@ -24,5 +24,8 @@ from practice.test_customers;
 ```
 ## Zadanie 6
 ```sql
-
+drop schema practice cascade;
+```
+```sql
+drop schema course_example cascade;
 ```
