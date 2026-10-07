@@ -187,3 +187,25 @@ current_date,
 ```
 Pending zostało wpisane do tabeli.
 ## Zadanie 14
+BŁĄD: nowy rekord dla relacji "orders" narusza ograniczenie sprawdzające "orders_status_check"
+```sql
+check (status in ('pending','paid','cancelled'))
+```
+ten constraint zablokował ten insert.
+## Zadanie 15
+```sql
+insert into course.order_items(
+order_id,
+line_number,
+product_id,
+quantity,
+unit_price)
+
+values(
+1000,
+1,
+100,
+1,
+149.00)
+```
+## Zadanie 16
