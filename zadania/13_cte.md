@@ -111,5 +111,22 @@ order by ct.total_revenue desc;
 ```
 ## Zadanie 6
 ```sql
-
+with order_items_totals as(
+	select
+	order_id,
+	sum(quantity * unit_price) as items_total_amount
+	from course.order_items
+	group by order_id
+	)
+select 
+o.order_id,
+o.status,
+o.total_amount as order_total_amount,
+oit.items_total_amount,
+(o.total_amount- oit.items_total_amount) as difference_amount
+from course.orders o
+left join order_items_totals oit
+on o.order_id = oit.order_id 
 ```
+## Zadanie 7
+
