@@ -208,3 +208,46 @@ total_revenue as metric_value
 from valuable_customers
 ```
 ## Zadanie 9
+```sql
+with product_sales as(
+	select
+	p.product_id,
+	p.product_name,
+	p.category,
+	sum(oi.quantity) as units_sold,
+	sum(oi.quantity * oi.unit_price) as total_revenue
+	from course.products p
+	join course.order_items oi
+	on p.product_id = oi.product_id
+	group by p.product_id
+	having(sum(oi.quantity) ) > 1
+)
+select 
+product_id, 
+product_name,
+category,
+units_sold,
+total_revenue
+from product_sales;
+```
+## Zadanie 10
+```sql
+with monthly_sales as(
+	select
+	date_trunc('month',o.order_date) as sales_month,
+	c.country,
+	count(o.order_id) as orders_count,
+	sum(o.total_amount) as total_revenue 
+	from course.orders o
+	join course.customers c 
+	on c.customer_id = o.customer_id 
+	group by c.country, o.order_date
+	having sum(o.total_amount) > 100
+ )
+select
+sales_month,
+country,
+orders_count, 
+total_revenue
+from monthly_sales 
+```
